@@ -2,8 +2,8 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\User;
-use Faker\Generator as Faker;
+use App\Student;
+use Faker\Factory as Faker;
 use Illuminate\Support\Str;
 
 /*
@@ -17,12 +17,23 @@ use Illuminate\Support\Str;
 |
 */
 
-$factory->define(User::class, function (Faker $faker) {
+$factory->define(Student::class, function () {
+    $faker = Faker::create('id_ID');
     return [
         'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'email_verified_at' => now(),
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        'email' => $faker->unique()->email,
+        'password' => bcrypt('dayung231'),
+        'phone' => $faker->unique()->phoneNumber,
+        'gender' => $faker->numberBetween(0,1),
+        'city' => $faker->city,
+        'ttl' => $faker->dateTimeBetween('1995-01-01', '2000-12-31')->format('Y-m-d'),
+        'description' => $faker->optional()->text(200),
+        'intake' => $faker->numberBetween(2016,2020),
+        'batch' => $faker->numberBetween(2014,2020),
+        'line' => $faker->userName,
+        'faculty' => $faker->jobTitle,
         'remember_token' => Str::random(10),
+        'created_at' => now(),
+        'updated_at' => now(),
     ];
 });
