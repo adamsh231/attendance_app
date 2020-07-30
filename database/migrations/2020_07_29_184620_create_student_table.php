@@ -27,6 +27,7 @@ class CreateStudentTable extends Migration
             $table->string('city')->nullable();
             $table->string('line')->nullable();
             $table->text('description')->nullable();
+            $table->boolean('status')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

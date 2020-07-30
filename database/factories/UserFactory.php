@@ -30,6 +30,7 @@ $factory->define(Student::class, function () {
         'description' => $faker->optional()->text(200),
         'intake' => $faker->numberBetween(2016,2020),
         'batch' => $faker->numberBetween(2014,2020),
+        'status' => $faker->numberBetween(0,1),
         'line' => $faker->userName,
         'faculty' => $faker->jobTitle,
         'remember_token' => Str::random(10),

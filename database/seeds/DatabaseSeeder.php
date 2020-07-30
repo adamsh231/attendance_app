@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
-        factory(Student::class, 25)->create();
+        factory(Student::class, 50)->create();
 
     }
 }
