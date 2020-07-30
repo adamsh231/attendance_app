@@ -52,6 +52,7 @@
                 </span>
             </div>
         </div>
+
         <div class="app-main">
             <div class="app-sidebar sidebar-shadow">
                 <div class="app-header__logo">

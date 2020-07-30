@@ -1953,6 +1953,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1968,6 +1992,22 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get(url).then(function (response) {
         _this.students = response.data;
+      });
+    },
+    updateStatus: function updateStatus(id) {
+      var _this2 = this;
+
+      $("#student" + id).hide();
+      axios.post("/api/update/status/" + id).then(function (response) {
+        _this2.fetchStudent(_this2.students.path + "?page=" + _this2.students.current_page);
+      })["catch"](function (error) {
+        $("#student" + id).show();
+        $("#student" + id).removeClass("btn-outline-info").addClass("btn-outline-danger");
+        $("#student" + id).html("Error");
+        setTimeout(function () {
+          $("#student" + id).removeClass("btn-outline-danger").addClass("btn-outline-info");
+          $("#student" + id).html("Wisuda");
+        }, 1000);
       });
     }
   },
@@ -37588,6 +37628,8 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "table-responsive" }, [
+    _vm._m(0),
+    _vm._v(" "),
     _c(
       "table",
       {
@@ -37595,7 +37637,7 @@ var render = function() {
           "align-middle mb-0 table table-borderless table-striped table-hover"
       },
       [
-        _vm._m(0),
+        _vm._m(1),
         _vm._v(" "),
         _c(
           "tbody",
@@ -37604,7 +37646,7 @@ var render = function() {
               _c("td", [
                 _c("div", { staticClass: "widget-content p-0" }, [
                   _c("div", { staticClass: "widget-content-wrapper" }, [
-                    _vm._m(1, true),
+                    _vm._m(2, true),
                     _vm._v(" "),
                     _c("div", { staticClass: "widget-content-left flex2" }, [
                       _c("div", { staticClass: "widget-heading" }, [
@@ -37631,14 +37673,34 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("td", { staticClass: "text-center" }, [
-                student.status == 1
-                  ? _c("div", { staticClass: "badge badge-success" }, [
-                      _vm._v("Lulus")
-                    ])
+                student.status == 0
+                  ? _c(
+                      "div",
+                      {
+                        staticClass: "btn btn-sm btn-outline-info",
+                        attrs: { id: "student" + student.id },
+                        on: {
+                          click: function($event) {
+                            return _vm.updateStatus(student.id)
+                          }
+                        }
+                      },
+                      [_vm._v("Wisuda")]
+                    )
                   : _vm._e()
               ]),
               _vm._v(" "),
-              _vm._m(2, true)
+              _c("td", { staticClass: "text-center" }, [
+                student.status == 1
+                  ? _c(
+                      "div",
+                      {
+                        staticClass: "btn btn-sm badge badge-success text-white"
+                      },
+                      [_c("b", [_vm._v("Lulus")])]
+                    )
+                  : _vm._e()
+              ])
             ])
           }),
           0
@@ -37682,11 +37744,27 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "input-group" }, [
+        _c("input", { staticClass: "form-control", attrs: { type: "text" } }),
+        _vm._v(" "),
+        _c("div", { staticClass: "input-group-append" }, [
+          _c("button", { staticClass: "btn btn-secondary" }, [_vm._v("Search")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
         _c("th", { staticClass: "text-center" }, [_vm._v("Name")]),
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("City")]),
+        _vm._v(" "),
+        _c("th"),
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("Status")])
       ])
@@ -37698,21 +37776,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "widget-content-left mr-3" }, [
       _c("div", { staticClass: "widget-content-left" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", { staticClass: "text-center" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary btn-sm",
-          attrs: { type: "button", id: "PopoverCustomT-1" }
-        },
-        [_vm._v("Details")]
-      )
     ])
   }
 ]

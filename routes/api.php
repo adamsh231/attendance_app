@@ -17,5 +17,6 @@ use Illuminate\Support\Facades\Route;
 //* --------------------------------- Web Application --------------------------------------- *//
 
 Route::get('/overview', 'Api\StudentController@overview');
+Route::post('/update/status/{student}', 'Api\StudentController@updateStatus');
 
 //* ----------------------------------------------------------------------------------------- *//
