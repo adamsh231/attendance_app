@@ -9,7 +9,7 @@ use App\Student;
 class StudentController extends Controller
 {
     public function overview(){
-        $student = Student::all();
+        $student = Student::paginate(10);
         return response()->json($student, 200);
     }
 }
