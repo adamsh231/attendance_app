@@ -2004,7 +2004,7 @@ __webpack_require__.r(__webpack_exports__);
 
       $("#student" + id).hide();
       axios.post("/api/update/status/" + id).then(function (response) {
-        _this2.fetchStudent(_this2.students.path + "?page=" + _this2.students.current_page);
+        _this2.fetchStudent(_this2.students.path + "?page=" + _this2.students.current_page + '&' + _this2.filter);
       })["catch"](function (error) {
         $("#student" + id).show();
         $("#student" + id).removeClass("btn-outline-info").addClass("btn-outline-danger");

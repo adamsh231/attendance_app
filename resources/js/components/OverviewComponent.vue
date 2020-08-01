@@ -94,7 +94,7 @@ export default {
 				.post("/api/update/status/" + id)
 				.then(response => {
 					this.fetchStudent(
-						this.students.path + "?page=" + this.students.current_page
+						this.students.path + "?page=" + this.students.current_page + '&' + this.filter
 					);
 				})
 				.catch(error => {
