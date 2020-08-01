@@ -2,10 +2,7 @@
 	<div class="table-responsive">
 		<div class="container">
 			<div class="input-group">
-				<input v-model="search" style="text-align:center" type="text" class="form-control" />
-				<div class="input-group-append">
-					<button @click="fetchStudent(url_def + '?' + filter)" class="btn btn-secondary">Search</button>
-				</div>
+				<input @input="fetchStudent(url_def + '?' + filter)" v-model="search" style="text-align:center" type="text" class="form-control" />
 			</div>
 		</div>
 		<table class="align-middle mb-0 table table-borderless table-striped table-hover">

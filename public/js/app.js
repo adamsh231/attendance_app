@@ -1977,9 +1977,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -37677,29 +37674,19 @@ var render = function() {
           attrs: { type: "text" },
           domProps: { value: _vm.search },
           on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.search = $event.target.value
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "input-group-append" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-secondary",
-              on: {
-                click: function($event) {
-                  return _vm.fetchStudent(_vm.url_def + "?" + _vm.filter)
+            input: [
+              function($event) {
+                if ($event.target.composing) {
+                  return
                 }
+                _vm.search = $event.target.value
+              },
+              function($event) {
+                return _vm.fetchStudent(_vm.url_def + "?" + _vm.filter)
               }
-            },
-            [_vm._v("Search")]
-          )
-        ])
+            ]
+          }
+        })
       ])
     ]),
     _vm._v(" "),
