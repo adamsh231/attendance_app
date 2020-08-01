@@ -8,8 +8,12 @@ use App\Student;
 
 class StudentController extends Controller
 {
-    public function overview(){
-        $student = Student::paginate(10);
+    public function overview(Request $request){
+        $student = (new Student)->newQuery();
+        if (!is_null($request->get('search'))) {
+            $student->where('name', 'LIKE', '%' . $request->get('search') . '%');
+        }
+        $student = $student->paginate(10);
         return response()->json($student, 200);
     }
 

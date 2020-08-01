@@ -2,9 +2,9 @@
 	<div class="table-responsive">
 		<div class="container">
 			<div class="input-group">
-				<input type="text" class="form-control" />
+				<input v-model="search" style="text-align:center" type="text" class="form-control" />
 				<div class="input-group-append">
-					<button class="btn btn-secondary">Search</button>
+					<button @click="fetchStudent(url_def + '?' + filter)" class="btn btn-secondary">Search</button>
 				</div>
 			</div>
 		</div>
@@ -27,6 +27,9 @@
 								</div>
 								<div class="widget-content-left flex2">
 									<div class="widget-heading">{{ student.name }}</div>
+
+                                    <nested-component></nested-component>
+
 									<div class="widget-subheading opacity-7">
 										Intake:
 										<b>{{ student.intake }}</b>
@@ -54,12 +57,12 @@
 		</table>
 		<div class="d-block text-center card-footer">
 			<button
-				@click="fetchStudent(students.prev_page_url)"
+				@click="fetchStudent(students.prev_page_url + '&' + filter)"
 				class="mr-2 btn-icon btn-icon-only btn btn-outline-primary"
 				:disabled="disablePrev"
 			>Prev</button>
 			<button
-				@click="fetchStudent(students.next_page_url)"
+				@click="fetchStudent(students.next_page_url + '&' + filter)"
 				class="mr-2 btn-icon btn-icon-only btn btn-outline-primary"
 				:disabled="disableNext"
 			>Next</button>
@@ -71,11 +74,13 @@
 export default {
 	data() {
 		return {
-			students: []
+            students: [],
+            search: "",
+            url_def: "/api/overview"
 		};
 	},
 	created() {
-		this.fetchStudent("/api/overview");
+		this.fetchStudent(this.url_def);
 	},
 	methods: {
 		fetchStudent(url) {
@@ -121,7 +126,11 @@ export default {
 				status = true;
 			}
 			return status;
-		}
+        },
+        filter(){
+            let filters = "search="+this.search;
+            return filters;
+        }
 	}
 };
 </script>
